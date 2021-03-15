@@ -1,0 +1,49 @@
+<form>
+    <div>
+        <label for="email">Email</label>
+        <input type="email" name="from" id="from">
+        <br>
+        <label for="subject">Asunto</label>
+        <input type="text" name="subject" id="subject">
+        <br>
+        <label for="body">Mensaje</label>
+        <textarea name="body" id="body" cols="30" rows="10"></textarea>
+    </div>
+    <br>
+    <div>
+        <input name="submit" type="submit" value="Enviar">
+    </div>    
+</form>
+<script>
+    window.addEventListener('load', function(){
+        const form = document.querySelector('form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            let data = new FormData(form);
+            const url = 'https://http://localhost:8080/contact'
+            fetch(url, {
+                method: 'POST',
+                body: data,
+                mode: 'cors',
+                headers: {
+                    'Access-Control-Allow-Origin':'*'
+                }
+            }).then( response => {
+                return response.text();
+            }).then( texto => {
+                //Work with result
+                if( texto == 'OK' ){
+                    //window.location = `${window.location.origin}/success`;
+                    alert('Mensaje enviado');
+                } else {
+                    alert('Fallo al enviar mensaje');
+                    //window.location = `${window.location.origin}/error`;
+                }
+                    
+            }).catch( error => {
+                alert('Fallo al enviar mensaje');
+                //window.location = `${window.location.origin}/error`;
+            })
+        })
+    });
+</script>
