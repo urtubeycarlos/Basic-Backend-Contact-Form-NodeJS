@@ -20,7 +20,7 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             let data = new FormData(form);
-            const url = 'https://http://localhost:8080/contact'
+            const url = 'https://http://localhost:8080/contact';
             fetch(url, {
                 method: 'POST',
                 body: data,
@@ -43,7 +43,7 @@
             }).catch( error => {
                 alert('Fallo al enviar mensaje');
                 //window.location = `${window.location.origin}/error`;
-            })
+            });
         })
     });
 </script>
